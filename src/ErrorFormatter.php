@@ -3,6 +3,7 @@
 namespace yii\graphql;
 
 use Yii;
+use GraphQL\Error\DebugFlag;
 use GraphQL\Error\Error;
 use GraphQL\Error\FormattedError;
 use yii\graphql\exceptions\ValidatorException;
@@ -32,6 +33,10 @@ class ErrorFormatter
             Yii::error($e->getMessage(), $e::class);
         }
 
-        return FormattedError::createFromException($e, YII_DEBUG);
+        $debugFlag = YII_DEBUG
+            ? (DebugFlag::INCLUDE_DEBUG_MESSAGE | DebugFlag::INCLUDE_TRACE)
+            : DebugFlag::NONE;
+
+        return FormattedError::createFromException($e, $debugFlag);
     }
 }

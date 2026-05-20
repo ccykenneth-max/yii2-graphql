@@ -246,9 +246,10 @@ class GraphQL
     public function execute($schema, $rootValue, $contextValue, $variableValues, $operationName)
     {
         try {
-            /** @var QueryComplexity $queryComplexity */
-            $queryComplexity = DocumentValidator::getRule('QueryComplexity');
-            $queryComplexity->setRawVariableValues($variableValues);
+            $queryComplexity = DocumentValidator::getRule(QueryComplexity::class);
+            if ($queryComplexity instanceof QueryComplexity) {
+                $queryComplexity->setRawVariableValues($variableValues);
+            }
 
             $validationErrors = DocumentValidator::validate($schema, $this->currentDocument);
 

@@ -2,7 +2,6 @@
 
 namespace yiiunit\extensions\graphql\objects\types;
 
-use GraphQL\Examples\Blog\Type\BaseType;
 use GraphQL\Type\Definition\EnumType;
 
 class ContentFormatEnumType extends EnumType
